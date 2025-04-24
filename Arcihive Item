@@ -1,0 +1,78 @@
+class ArciveItem:
+    uid=''
+    title=''
+    year=0
+
+    def __init__(self,uid,title,year):
+        self.uid=uid
+        self.title=title
+        self.year=year
+
+    def __str__(self):
+        return "UID : "+str(self.uid)+"\nTITLE : "+str(self.title)+"\nYEAR : "+str(self.year)
+
+
+    def __eq__(self,other):
+        return self.uid==other.uid
+
+    def is_recent(self,n):
+         if (n<=2025 and n>=self.year):
+             return True
+
+
+def save_to_file(items,filename):
+    filename=open(filename,"a")
+    for item in items:
+      filename.write(str(item))
+
+def load_from_file(filename):
+    filename=open(filename,'a')
+    filename.readlines()
+    for lines in filename:
+
+
+
+
+
+
+
+class Book(ArciveItem):
+    author=''
+    pages=''
+
+    def __str__(self):
+        return "Author : "+str(self.author)+"\nPages : "+str(self.pages)
+
+class Article(ArciveItem):
+    journal=''
+    doi=''
+
+    def __str__(self):
+        return "Journal : "+str(self.journal)+"\nDoi : "+str(self.doi)
+
+class Podcast(ArciveItem):
+    host=''
+    duration=0
+
+    def __str__(self):
+        return "Host : "+str(self.host)+"\nDuration : "+str(self.duration)
+
+book1 = Book('B123', 'The Great Book', 2021)
+book1.author = 'John Doe'
+book1.pages = 320
+
+# Article object
+article1 = Article('A456', 'AI Research in 2025', 2025)
+article1.journal = 'AI Journal'
+article1.doi = '10.1234/ai2025.12345'
+
+# Podcast object
+podcast1 = Podcast('P789', 'TechTalk', 2023)
+podcast1.host = 'Alice Smith'
+podcast1.duration = 60
+
+# Creating a list of items to test save_to_file method
+items = [book1, article1, podcast1]
+
+save_to_file(items,"test.txt")
+load_from_file("test.txt")
